@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TopcoderNetApi.Model
 {
@@ -13,6 +14,8 @@ namespace TopcoderNetApi.Model
         /// <value>
         /// The identifier.
         /// </value>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
         /// <summary>
