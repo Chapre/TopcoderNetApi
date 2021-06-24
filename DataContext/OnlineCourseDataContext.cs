@@ -43,7 +43,7 @@ namespace TopcoderNetApi
         /// <value>
         /// The watch logs.
         /// </value>
-        public DbSet<Course> WatchLogs { get; set; }
+        public DbSet<WatchLog> WatchLogs { get; set; }
 
         /// <summary>
         /// Gets or sets the users.
@@ -51,6 +51,6 @@ namespace TopcoderNetApi
         /// <value>
         /// The users.
         /// </value>
-        public DbSet<Section> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
