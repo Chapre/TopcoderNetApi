@@ -37,37 +37,15 @@ namespace TopcoderNetApi
         /// </value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        /// <summary>
+        /// Configures the swagger.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        private void ConfigureSwagger(IServiceCollection services)
         {
-            ConfigureDatabaseContext(services);
-            services.AddControllers().AddJsonOptions(options =>
-                options.JsonSerializerOptions.PropertyNamingPolicy = null);
-            services.AddHttpContextAccessor();
-            services.AddSingleton<IContextService, ContextService>();
-            services.AddTransient<ILessonService, LessonService>();
-            services.AddTransient<ICourseService, CourseService>();
-            services.AddTransient<ISectionService, SectionService>();
-            services.AddTransient<IWatchLogService, WatchLogService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ILoginService, LoginService>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                    };
-                });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "TopcoderNetApi", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
@@ -94,6 +72,46 @@ namespace TopcoderNetApi
             });
         }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ConfigureDatabaseContext(services);
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IContextService, ContextService>();
+            services.AddTransient<ILessonService, LessonService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ISectionService, SectionService>();
+            services.AddTransient<IWatchLogService, WatchLogService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILoginService, LoginService>();
+            ConfigureJwtAuthentication(services);
+            ConfigureSwagger(services);
+        }
+
+        /// <summary>
+        /// Configures the jwt authentication.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        private void ConfigureJwtAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
+        }
+
         /// <summary>
         /// Configures the database context.
         /// Create tables and seed initial user root
@@ -111,7 +129,7 @@ namespace TopcoderNetApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IContextService onlineDb)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IContextService database)
         {
             if (env.IsDevelopment())
             {
@@ -120,7 +138,7 @@ namespace TopcoderNetApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TopcoderNetApi v1"));
             }
 
-            onlineDb.Initialise();
+            database.Initialise();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
