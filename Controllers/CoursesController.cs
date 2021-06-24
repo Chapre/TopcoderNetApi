@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Courses;
 
@@ -10,9 +8,9 @@ using TopcoderNetApi.Services.Courses;
 
 namespace TopcoderNetApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("course")]
     [ApiController]
-    public class CourseController : ControllerBase
+    public class CoursesController : ControllerBase
     {
         /// <summary>
         /// The service
@@ -20,10 +18,10 @@ namespace TopcoderNetApi.Controllers
         private readonly ICourseService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CourseController"/> class.
+        /// Initializes a new instance of the <see cref="CoursesController"/> class.
         /// </summary>
         /// <param name="service">The service.</param>
-        public CourseController(ICourseService service)
+        public CoursesController(ICourseService service)
         {
             _service = service;
         }
@@ -47,18 +45,6 @@ namespace TopcoderNetApi.Controllers
         public void Post([FromBody] Course value)
         {
             _service.AddCourse(value);
-        }
-
-        // PUT api/<CourseController1>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CourseController1>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

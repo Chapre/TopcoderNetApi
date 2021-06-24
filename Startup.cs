@@ -12,7 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TopcoderNetApi.DataContext;
+using TopcoderNetApi.Services.Courses;
 using TopcoderNetApi.Services.Lessons;
+using TopcoderNetApi.Services.Sections;
 
 namespace TopcoderNetApi
 {
@@ -32,6 +34,8 @@ namespace TopcoderNetApi
             services.AddControllers();
             services.AddSingleton<IContextService, ContextService>();
             services.AddTransient<ILessonService, LessonService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ISectionService, SectionService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });

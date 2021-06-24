@@ -5,9 +5,9 @@ using TopcoderNetApi.Services.Lessons;
 
 namespace TopcoderNetApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("lesson")]
     [ApiController]
-    public class LessonController : ControllerBase
+    public class LessonsController : ControllerBase
     {
         /// <summary>
         /// The service
@@ -15,10 +15,10 @@ namespace TopcoderNetApi.Controllers
         private readonly ILessonService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LessonController"/> class.
+        /// Initializes a new instance of the <see cref="LessonsController"/> class.
         /// </summary>
         /// <param name="service">The service.</param>
-        public LessonController(ILessonService service)
+        public LessonsController(ILessonService service)
         {
             _service = service;
         }

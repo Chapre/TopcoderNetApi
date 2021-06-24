@@ -35,6 +35,10 @@ namespace TopcoderNetApi.Services.Courses
             return course;
         }
 
+        /// <summary>
+        /// Adds the course.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public void AddCourse(Course value)
         {
             var course = new Course()

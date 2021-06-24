@@ -1,9 +1,10 @@
 ﻿using System;
+using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Lessons
 {
     public interface ILessonService
     {
-       Model.Lesson GetLesson(Guid id);
+       Lesson GetLesson(Guid id);
     }
 }
