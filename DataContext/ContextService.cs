@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.DataContext
 {
@@ -41,7 +43,23 @@ namespace TopcoderNetApi.DataContext
                 return;
             using var scope = _serviceProvider.CreateScope();
             ApplyContextMigration(scope);
+            SeedUsers(scope);
             Initialised = true;
+        }
+
+        /// <summary>
+        /// Seeds the users.
+        /// </summary>
+        /// <param name="scope">The scope.</param>
+        private void SeedUsers(IServiceScope scope)
+        {
+            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
+            var root = context.Users.FirstOrDefault(x => x.FullName == "root");
+            if (root!=null)
+                return;
+            root = new User() {FullName = "root", ImageUrl = "root"};
+            context.Users.Add(root);
+            context.SaveChanges();
         }
 
         /// <summary>
@@ -62,6 +80,8 @@ namespace TopcoderNetApi.DataContext
                 _logger.LogInformation($"Migrating context failed!{Environment.NewLine}{ex?.Message}");
                 throw;
             }
+            
+            
         }
     }
 }

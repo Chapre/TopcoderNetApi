@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Sections;
 
@@ -10,6 +11,7 @@ namespace TopcoderNetApi.Controllers
 {
     [Route("section")]
     [ApiController]
+    [Authorize]
     public class SectionsController : ControllerBase
     {
         /// <summary>

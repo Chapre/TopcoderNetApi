@@ -40,7 +40,7 @@ namespace TopcoderNetApi
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<ISectionService, SectionService>();
             services.AddTransient<IWatchLogService, WatchLogService>();
-            services.AddTransient<IUSerService, USerService>();
+            services.AddTransient<IUserService, USerService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "TopcoderNetApi", Version = "v1"});

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Lessons;
@@ -7,6 +8,7 @@ namespace TopcoderNetApi.Controllers
 {
     [Route("lesson")]
     [ApiController]
+    [Authorize]
     public class LessonsController : ControllerBase
     {
         /// <summary>

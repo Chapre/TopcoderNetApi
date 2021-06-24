@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Users;
 
@@ -12,18 +13,19 @@ namespace TopcoderNetApi.Controllers
 {
     [Route("user")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         /// <summary>
         /// The service
         /// </summary>
-        private readonly IUSerService _service;
+        private readonly IUserService _service;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// </summary>
         /// <param name="service">The service.</param>
-        public UsersController(IUSerService service)
+        public UsersController(IUserService service)
         {
             _service = service;
         }

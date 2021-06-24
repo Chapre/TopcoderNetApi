@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.WatchLogs;
 
@@ -10,6 +11,7 @@ namespace TopcoderNetApi.Controllers
 {
     [Route("watchLog")]
     [ApiController]
+    [Authorize]
     public class WatchLogsController : ControllerBase
     {
         /// <summary>

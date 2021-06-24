@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TopcoderNetApi.Model;
+using TopcoderNetApi.Services.Users;
 
 namespace TopcoderNetApi.Controllers
 {
@@ -19,17 +20,24 @@ namespace TopcoderNetApi.Controllers
     public class LoginController : ControllerBase
     {
         /// <summary>
-        /// The configuration
+        /// The login service
         /// </summary>
-        private readonly IConfiguration _config;
+        private readonly ILoginService _loginService;
+
+        /// <summary>
+        /// The user service
+        /// </summary>
+        private readonly IUserService _userService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginController"/> class.
         /// </summary>
-        /// <param name="config">The configuration.</param>
-        public LoginController(IConfiguration config)
+        /// <param name="loginService">The login service.</param>
+        /// <param name="userService">The user service.</param>
+        public LoginController( ILoginService loginService, IUserService userService)
         {
-            _config = config;
+            _loginService = loginService;
+            _userService = userService;
         }
 
         [AllowAnonymous]
@@ -37,54 +45,14 @@ namespace TopcoderNetApi.Controllers
         public IActionResult Login([FromBody] LoginModel login)
         {
             IActionResult response = Unauthorized();
-            var user = AuthenticateUser(login);
-
+            var user = _userService.GetUserByName(login.Username);
             if (user != null)
             {
-                var tokenString = GenerateJsonWebToken(user);
+                var tokenString = _loginService.GenerateJwt(user);
                 response = Ok(new { token = tokenString });
             }
 
             return response;
-        }
-
-        /// <summary>
-        /// Generates the json web token.
-        /// </summary>
-        /// <param name="userInfo">The user information.</param>
-        /// <returns></returns>
-        private string GenerateJsonWebToken(LoginModel userInfo)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, userInfo.Username),
-                new Claim(JwtRegisteredClaimNames.Email, userInfo.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                _config["Jwt:Issuer"],
-                claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        /// <summary>
-        /// Authenticates the user.
-        /// </summary>
-        /// <param name="login">The login.</param>
-        /// <returns></returns>
-        private LoginModel AuthenticateUser(LoginModel login)
-        {
-            LoginModel user = null;
-            if (login.Username == "Jignesh")
-            {
-                user = new LoginModel { Username = "Jignesh Trivedi", Email = "test.btest@gmail.com" };
-            }
-            return user;
         }
     }
 }

@@ -5,7 +5,7 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
 {
-    class USerService : IUSerService
+    class USerService : IUserService
     {
         /// <summary>
         /// The context
@@ -55,6 +55,16 @@ namespace TopcoderNetApi.Services.Users
 
             _context.Users.Add(user);
             _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets the name of the user by.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
+        public User GetUserByName(string name)
+        {
+            return _context.Users.FirstOrDefault(x => x.FullName == name);
         }
     }
 }
