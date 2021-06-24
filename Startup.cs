@@ -43,6 +43,7 @@ namespace TopcoderNetApi
             ConfigureDatabaseContext(services);
             services.AddControllers().AddJsonOptions(options =>
                 options.JsonSerializerOptions.PropertyNamingPolicy = null);
+            services.AddHttpContextAccessor();
             services.AddSingleton<IContextService, ContextService>();
             services.AddTransient<ILessonService, LessonService>();
             services.AddTransient<ICourseService, CourseService>();

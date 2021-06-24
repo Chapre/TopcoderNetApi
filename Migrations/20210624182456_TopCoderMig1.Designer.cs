@@ -10,7 +10,7 @@ using TopcoderNetApi.DataContext;
 namespace TopcoderNetApi.Migrations
 {
     [DbContext(typeof(OnlineCourseDataContext))]
-    [Migration("20210624170224_TopCoderMig1")]
+    [Migration("20210624182456_TopCoderMig1")]
     partial class TopCoderMig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,9 @@ namespace TopcoderNetApi.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

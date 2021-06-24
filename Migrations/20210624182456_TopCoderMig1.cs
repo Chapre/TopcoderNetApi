@@ -60,7 +60,8 @@ namespace TopcoderNetApi.Migrations
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     VideoUrl = table.Column<string>(type: "nvarchar(355)", maxLength: 355, nullable: true),
                     Order = table.Column<int>(type: "int", nullable: false),
-                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsCompleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
