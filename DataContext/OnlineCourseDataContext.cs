@@ -6,6 +6,14 @@ namespace TopcoderNetApi
     public class OnlineCourseDataContext: DbContext
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="OnlineCourseDataContext"/> class.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        public OnlineCourseDataContext(DbContextOptions<OnlineCourseDataContext> options) : base(options)
+        {
+        }
+        
+        /// <summary>
         /// Gets or sets the courses.
         /// </summary>
         /// <value>
