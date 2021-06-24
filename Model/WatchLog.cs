@@ -45,6 +45,6 @@ namespace TopcoderNetApi.Model
         /// <value>
         /// The percentage watched.
         /// </value>
-        private int PercentageWatched { get; set; }
+        public int PercentageWatched { get; set; }
     }
 }
