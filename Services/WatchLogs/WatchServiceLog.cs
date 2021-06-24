@@ -5,15 +5,15 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.WatchLogs
 {
-    class WatchLogService : IWatchLogService
+    internal class WatchLogService : IWatchLogService
     {
         /// <summary>
-        /// The context
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WatchLogService"/> class.
+        ///     Initializes a new instance of the <see cref="WatchLogService" /> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public WatchLogService(OnlineCourseDataContext context)
@@ -22,7 +22,7 @@ namespace TopcoderNetApi.Services.WatchLogs
         }
 
         /// <summary>
-        /// Gets the watch logs.
+        ///     Gets the watch logs.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<WatchLog> GetWatchLogs()
@@ -31,7 +31,7 @@ namespace TopcoderNetApi.Services.WatchLogs
         }
 
         /// <summary>
-        /// Gets the watch log.
+        ///     Gets the watch log.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace TopcoderNetApi.Services.WatchLogs
         }
 
         /// <summary>
-        /// Adds the watch log.
+        ///     Adds the watch log.
         /// </summary>
         /// <param name="log">The log.</param>
         public void AddWatchLog(WatchLog log)
@@ -60,14 +60,14 @@ namespace TopcoderNetApi.Services.WatchLogs
         }
 
         /// <summary>
-        /// Creates the record.
+        ///     Creates the record.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="lesson">The lesson.</param>
         /// <param name="pw">The pw.</param>
         public void CreateRecord(User user, Lesson lesson, int pw)
         {
-            var log = new WatchLog()
+            var log = new WatchLog
             {
                 User = user,
                 Lesson = lesson,

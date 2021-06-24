@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Services.Courses;
 using TopcoderNetApi.Services.Lessons;
@@ -21,7 +21,7 @@ namespace TopcoderNetApi
     public class Startup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
+        ///     Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
@@ -30,10 +30,10 @@ namespace TopcoderNetApi
         }
 
         /// <summary>
-        /// Gets the configuration.
+        ///     Gets the configuration.
         /// </summary>
         /// <value>
-        /// The configuration.
+        ///     The configuration.
         /// </value>
         public IConfiguration Configuration { get; }
 
@@ -67,7 +67,7 @@ namespace TopcoderNetApi
                 });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "TopcoderNetApi", Version = "v1"});
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
@@ -95,7 +95,8 @@ namespace TopcoderNetApi
         }
 
         /// <summary>
-        ///     Configures the database context.
+        /// Configures the database context.
+        /// Create tables and seed initial user root
         /// </summary>
         /// <param name="services">The services.</param>
         private void ConfigureDatabaseContext(IServiceCollection services)
@@ -123,10 +124,7 @@ namespace TopcoderNetApi
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Users;
 
@@ -17,12 +14,12 @@ namespace TopcoderNetApi.Controllers
     public class UsersController : ControllerBase
     {
         /// <summary>
-        /// The service
+        ///     The service
         /// </summary>
         private readonly IUserService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UsersController"/> class.
+        ///     Initializes a new instance of the <see cref="UsersController" /> class.
         /// </summary>
         /// <param name="service">The service.</param>
         public UsersController(IUserService service)
@@ -31,7 +28,7 @@ namespace TopcoderNetApi.Controllers
         }
 
         /// <summary>
-        /// Gets this instance.
+        ///     Gets this instance.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -41,19 +38,18 @@ namespace TopcoderNetApi.Controllers
         }
 
         /// <summary>
-        /// Gets the specified identifier.
+        ///     Gets the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public User Get(string id)
         {
-            var user= _service.GetUser(id);
-            return user;
+            return _service.GetUser(id);
         }
 
         /// <summary>
-        /// Posts the specified value.
+        ///     Posts the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         [HttpPost]

@@ -8,147 +8,141 @@ namespace TopcoderNetApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
+                "Courses",
+                table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Id = table.Column<Guid>("uniqueidentifier", nullable: false),
+                    Name = table.Column<string>("nvarchar(250)", maxLength: 250, nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Courses", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>("nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>("nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Sections",
-                columns: table => new
+                "Sections",
+                table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Order = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<Guid>("uniqueidentifier", nullable: false),
+                    Name = table.Column<string>("nvarchar(250)", maxLength: 250, nullable: false),
+                    Order = table.Column<int>("int", nullable: false),
+                    CourseId = table.Column<Guid>("uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sections_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
+                        "FK_Sections_Courses_CourseId",
+                        x => x.CourseId,
+                        "Courses",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lessons",
-                columns: table => new
+                "Lessons",
+                table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    VideoUrl = table.Column<string>(type: "nvarchar(355)", maxLength: 355, nullable: true),
-                    Order = table.Column<int>(type: "int", nullable: false),
-                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsCompleted = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<Guid>("uniqueidentifier", nullable: false),
+                    Name = table.Column<string>("nvarchar(250)", maxLength: 250, nullable: false),
+                    VideoUrl = table.Column<string>("nvarchar(355)", maxLength: 355, nullable: true),
+                    Order = table.Column<int>("int", nullable: false),
+                    SectionId = table.Column<Guid>("uniqueidentifier", nullable: true),
+                    IsCompleted = table.Column<bool>("bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lessons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Lessons_Sections_SectionId",
-                        column: x => x.SectionId,
-                        principalTable: "Sections",
-                        principalColumn: "Id",
+                        "FK_Lessons_Sections_SectionId",
+                        x => x.SectionId,
+                        "Sections",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WatchLogs",
-                columns: table => new
+                "WatchLogs",
+                table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LessonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PercentageWatched = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>("nvarchar(450)", nullable: false),
+                    CourseId = table.Column<Guid>("uniqueidentifier", nullable: true),
+                    LessonId = table.Column<Guid>("uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>("nvarchar(450)", nullable: true),
+                    PercentageWatched = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WatchLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WatchLogs_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
+                        "FK_WatchLogs_Courses_CourseId",
+                        x => x.CourseId,
+                        "Courses",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WatchLogs_Lessons_LessonId",
-                        column: x => x.LessonId,
-                        principalTable: "Lessons",
-                        principalColumn: "Id",
+                        "FK_WatchLogs_Lessons_LessonId",
+                        x => x.LessonId,
+                        "Lessons",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WatchLogs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
+                        "FK_WatchLogs_Users_UserId",
+                        x => x.UserId,
+                        "Users",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lessons_SectionId",
-                table: "Lessons",
-                column: "SectionId");
+                "IX_Lessons_SectionId",
+                "Lessons",
+                "SectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sections_CourseId",
-                table: "Sections",
-                column: "CourseId");
+                "IX_Sections_CourseId",
+                "Sections",
+                "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WatchLogs_CourseId",
-                table: "WatchLogs",
-                column: "CourseId");
+                "IX_WatchLogs_CourseId",
+                "WatchLogs",
+                "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WatchLogs_LessonId",
-                table: "WatchLogs",
-                column: "LessonId");
+                "IX_WatchLogs_LessonId",
+                "WatchLogs",
+                "LessonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WatchLogs_UserId",
-                table: "WatchLogs",
-                column: "UserId");
+                "IX_WatchLogs_UserId",
+                "WatchLogs",
+                "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WatchLogs");
+                "WatchLogs");
 
             migrationBuilder.DropTable(
-                name: "Lessons");
+                "Lessons");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                "Sections");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                "Courses");
         }
     }
 }

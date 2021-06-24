@@ -6,26 +6,26 @@ namespace TopcoderNetApi.Services.WatchLogs
     public interface IWatchLogService
     {
         /// <summary>
-        /// Gets the watch logs.
+        ///     Gets the watch logs.
         /// </summary>
         /// <returns></returns>
         IEnumerable<WatchLog> GetWatchLogs();
 
         /// <summary>
-        /// Gets the watch log.
+        ///     Gets the watch log.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         WatchLog GetWatchLog(int id);
 
         /// <summary>
-        /// Adds the watch log.
+        ///     Adds the watch log.
         /// </summary>
         /// <param name="value">The value.</param>
         void AddWatchLog(WatchLog value);
 
         /// <summary>
-        /// Creates the record.
+        ///     Creates the record.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="lesson">The lesson.</param>

@@ -5,60 +5,54 @@ namespace TopcoderNetApi.Model
 {
     public class Lesson
     {
-        //Id: string (GUID)
-        //Name: string (250 chars)
-        //videoUrl: string (355 chars)
-        //Order: number
-        //sectionId: Foreign key to section.id
-        
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        ///     The identifier.
         /// </value>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         /// <value>
-        /// The name.
+        ///     The name.
         /// </value>
         [Required]
         [MaxLength(250)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the video URL.
+        ///     Gets or sets the video URL.
         /// </summary>
         /// <value>
-        /// The video URL.
+        ///     The video URL.
         /// </value>
         [MaxLength(355)]
         public string VideoUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the order.
+        ///     Gets or sets the order.
         /// </summary>
         /// <value>
-        /// The order.
+        ///     The order.
         /// </value>
         public int Order { get; set; }
 
         /// <summary>
-        /// Gets or sets the section.
+        ///     Gets or sets the section.
         /// </summary>
         /// <value>
-        /// The section.
+        ///     The section.
         /// </value>
         public Section Section { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is completed.
+        ///     Gets or sets a value indicating whether this instance is completed.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance is completed; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is completed; otherwise, <c>false</c>.
         /// </value>
         public bool IsCompleted { get; set; }
     }

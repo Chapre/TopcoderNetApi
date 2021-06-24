@@ -3,53 +3,53 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.DataContext
 {
-    public class OnlineCourseDataContext: DbContext
+    public class OnlineCourseDataContext : DbContext
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OnlineCourseDataContext"/> class.
+        ///     Initializes a new instance of the <see cref="OnlineCourseDataContext" /> class.
         /// </summary>
         /// <param name="options">The options.</param>
         public OnlineCourseDataContext(DbContextOptions<OnlineCourseDataContext> options) : base(options)
         {
         }
-        
+
         /// <summary>
-        /// Gets or sets the courses.
+        ///     Gets or sets the courses.
         /// </summary>
         /// <value>
-        /// The courses.
+        ///     The courses.
         /// </value>
         public DbSet<Course> Courses { get; set; }
 
         /// <summary>
-        /// Gets or sets the sections.
+        ///     Gets or sets the sections.
         /// </summary>
         /// <value>
-        /// The sections.
+        ///     The sections.
         /// </value>
         public DbSet<Section> Sections { get; set; }
 
         /// <summary>
-        /// Gets or sets the lessons.
+        ///     Gets or sets the lessons.
         /// </summary>
         /// <value>
-        /// The lessons.
+        ///     The lessons.
         /// </value>
         public DbSet<Lesson> Lessons { get; set; }
 
         /// <summary>
-        /// Gets or sets the watch logs.
+        ///     Gets or sets the watch logs.
         /// </summary>
         /// <value>
-        /// The watch logs.
+        ///     The watch logs.
         /// </value>
         public DbSet<WatchLog> WatchLogs { get; set; }
 
         /// <summary>
-        /// Gets or sets the users.
+        ///     Gets or sets the users.
         /// </summary>
         /// <value>
-        /// The users.
+        ///     The users.
         /// </value>
         public DbSet<User> Users { get; set; }
     }

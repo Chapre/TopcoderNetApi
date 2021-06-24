@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Courses;
 
@@ -15,18 +15,19 @@ namespace TopcoderNetApi.Controllers
     public class CoursesController : ControllerBase
     {
         /// <summary>
-        /// The service
+        ///     The service
         /// </summary>
         private readonly ICourseService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CoursesController"/> class.
+        ///     Initializes a new instance of the <see cref="CoursesController" /> class.
         /// </summary>
         /// <param name="service">The service.</param>
         public CoursesController(ICourseService service)
         {
             _service = service;
         }
+
         // GET: api/<CourseController1>
         [HttpGet]
         public IEnumerable<Course> Get()

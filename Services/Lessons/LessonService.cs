@@ -7,15 +7,15 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Lessons
 {
-    class LessonService : ILessonService
+    internal class LessonService : ILessonService
     {
         /// <summary>
-        /// The context
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LessonService"/> class.
+        ///     Initializes a new instance of the <see cref="LessonService" /> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public LessonService(OnlineCourseDataContext context)
@@ -24,11 +24,11 @@ namespace TopcoderNetApi.Services.Lessons
         }
 
         /// <summary>
-        /// Gets the lesson.
+        ///     Gets the lesson.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Model.Lesson GetLesson(Guid id)
+        public Lesson GetLesson(Guid id)
         {
             var lesson = _context.Lessons.Include(x => x.Section).ThenInclude(x => x.Course)
                 .FirstOrDefault(x => x.Id == id);
@@ -38,7 +38,7 @@ namespace TopcoderNetApi.Services.Lessons
         }
 
         /// <summary>
-        /// Gets the lessons.
+        ///     Gets the lessons.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Lesson> GetLessons()
@@ -47,13 +47,14 @@ namespace TopcoderNetApi.Services.Lessons
         }
 
         /// <summary>
-        /// Completes the specified lesson identifier.
+        ///     Completes the specified lesson identifier.
         /// </summary>
         /// <param name="lessonId">The lesson identifier.</param>
         public void Complete(Guid lessonId)
         {
             var lesson = _context.Lessons.First(x => x.Id == lessonId);
             lesson.IsCompleted = true;
+            _context.SaveChanges();
         }
     }
 }

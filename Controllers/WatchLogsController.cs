@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Lessons;
 using TopcoderNetApi.Services.Users;
@@ -17,24 +17,23 @@ namespace TopcoderNetApi.Controllers
     public class WatchLogsController : ControllerBase
     {
         /// <summary>
-        /// The context
-        /// </summary>
-        private readonly IWatchLogService _service;
-
-        /// <summary>
-        /// The lesson service
+        ///     The lesson service
         /// </summary>
         private readonly ILessonService _lessonService;
 
+        /// <summary>
+        ///     The login service
+        /// </summary>
         private readonly ILoginService _loginService;
 
         /// <summary>
-        /// The user service
+        ///     The context
         /// </summary>
-        private readonly IUserService _userService;
+        private readonly IWatchLogService _service;
+
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WatchLogsController" /> class.
+        ///     Initializes a new instance of the <see cref="WatchLogsController" /> class.
         /// </summary>
         /// <param name="service">The service.</param>
         /// <param name="lessonService">The lesson service.</param>
@@ -69,7 +68,7 @@ namespace TopcoderNetApi.Controllers
         }
 
         /// <summary>
-        /// Post2s the specified lesson identifier.
+        ///     Post2s the specified lesson identifier.
         /// </summary>
         /// <param name="lessonId">The lesson identifier.</param>
         /// <param name="pw">The pw.</param>

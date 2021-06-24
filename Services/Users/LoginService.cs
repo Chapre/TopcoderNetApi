@@ -11,25 +11,25 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
 {
-    class LoginService : ILoginService
+    internal class LoginService : ILoginService
     {
         /// <summary>
-        /// The configuration
-        /// </summary>
-        private readonly IConfiguration _config;
-
-        /// <summary>
-        /// The accessor
+        ///     The accessor
         /// </summary>
         private readonly IHttpContextAccessor _accessor;
 
         /// <summary>
-        /// The context
+        ///     The configuration
+        /// </summary>
+        private readonly IConfiguration _config;
+
+        /// <summary>
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoginService" /> class.
+        ///     Initializes a new instance of the <see cref="LoginService" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="accessor">The accessor.</param>
@@ -42,7 +42,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Gets the active user.
+        ///     Gets the active user.
         /// </summary>
         /// <returns></returns>
         public User GetActiveUser()
@@ -57,7 +57,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Generates the JWT.
+        ///     Generates the JWT.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns></returns>

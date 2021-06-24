@@ -5,15 +5,15 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
 {
-    class UserService : IUserService
+    internal class UserService : IUserService
     {
         /// <summary>
-        /// The context
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserService"/> class.
+        ///     Initializes a new instance of the <see cref="UserService" /> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public UserService(OnlineCourseDataContext context)
@@ -22,7 +22,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Gets the user.
+        ///     Gets the user.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Gets the users.
+        ///     Gets the users.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<User> GetUsers()
@@ -42,7 +42,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Adds the user.
+        ///     Adds the user.
         /// </summary>
         /// <param name="user">The user.</param>
         public void AddUser(User user)
@@ -58,7 +58,7 @@ namespace TopcoderNetApi.Services.Users
         }
 
         /// <summary>
-        /// Gets the name of the user by.
+        ///     Gets the name of the user by.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>

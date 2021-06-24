@@ -6,36 +6,36 @@ namespace TopcoderNetApi.Model
     public class Section
     {
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        ///     The identifier.
         /// </value>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
         /// <value>
-        /// The name.
+        ///     The name.
         /// </value>
         [Required]
         [MaxLength(250)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the order.
+        ///     Gets or sets the order.
         /// </summary>
         /// <value>
-        /// The order.
+        ///     The order.
         /// </value>
         public int Order { get; set; }
 
         /// <summary>
-        /// Gets or sets the course.
+        ///     Gets or sets the course.
         /// </summary>
         /// <value>
-        /// The course.
+        ///     The course.
         /// </value>
         public Course Course { get; set; }
     }

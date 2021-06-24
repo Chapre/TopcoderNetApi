@@ -6,23 +6,24 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Courses
 {
-    class CourseService : ICourseService
+    internal class CourseService : ICourseService
     {
         /// <summary>
-        /// The context
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CourseService"/> class.
+        ///     Initializes a new instance of the <see cref="CourseService" /> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public CourseService(OnlineCourseDataContext context)
         {
             _context = context;
         }
+
         /// <summary>
-        /// Gets the courses.
+        ///     Gets the courses.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Course> GetCourses()
@@ -37,12 +38,12 @@ namespace TopcoderNetApi.Services.Courses
         }
 
         /// <summary>
-        /// Adds the course.
+        ///     Adds the course.
         /// </summary>
         /// <param name="value">The value.</param>
         public void AddCourse(Course value)
         {
-            var course = new Course()
+            var course = new Course
             {
                 Name = value.Name
             };

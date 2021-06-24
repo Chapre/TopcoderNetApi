@@ -8,15 +8,15 @@ using TopcoderNetApi.Services.Lessons;
 
 namespace TopcoderNetApi.Services.Sections
 {
-    class SectionService : ISectionService
+    internal class SectionService : ISectionService
     {
         /// <summary>
-        /// The context
+        ///     The context
         /// </summary>
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LessonService"/> class.
+        ///     Initializes a new instance of the <see cref="LessonService" /> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public SectionService(OnlineCourseDataContext context)
@@ -25,7 +25,7 @@ namespace TopcoderNetApi.Services.Sections
         }
 
         /// <summary>
-        /// Gets the lesson.
+        ///     Gets the lesson.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -38,7 +38,7 @@ namespace TopcoderNetApi.Services.Sections
         }
 
         /// <summary>
-        /// Gets the sections.
+        ///     Gets the sections.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Section> GetSections()
@@ -47,13 +47,13 @@ namespace TopcoderNetApi.Services.Sections
         }
 
         /// <summary>
-        /// Adds the setion.
+        ///     Adds the setion.
         /// </summary>
         /// <param name="section">The section.</param>
         public void AddSetion(Section section)
         {
             var course = _context.Courses.First(x => x.Id == section.Course.Id);
-            section = new Section()
+            section = new Section
             {
                 Name = section.Name,
                 Order = section.Order,

@@ -8,19 +8,10 @@ using TopcoderNetApi.Model;
 namespace TopcoderNetApi.DataContext
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <seealso cref="TopcoderNetApi.DataContext.IContextService" />
-    public class ContextService: IContextService
+    public class ContextService : IContextService
     {
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="IContextService" /> is initialised.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if initialised; otherwise, <c>false</c>.
-        /// </value>
-        public bool Initialised { get; private set; }   
-        
         /// <summary>
         ///     The logger
         /// </summary>
@@ -32,7 +23,7 @@ namespace TopcoderNetApi.DataContext
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContextService"/> class.
+        ///     Initializes a new instance of the <see cref="ContextService" /> class.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
         /// <param name="logger">The logger.</param>
@@ -43,7 +34,15 @@ namespace TopcoderNetApi.DataContext
         }
 
         /// <summary>
-        /// Initialises this instance.
+        ///     Gets a value indicating whether this <see cref="IContextService" /> is initialised.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if initialised; otherwise, <c>false</c>.
+        /// </value>
+        public bool Initialised { get; private set; }
+
+        /// <summary>
+        ///     Initialises this instance.
         /// </summary>
         public void Initialise()
         {
@@ -52,12 +51,12 @@ namespace TopcoderNetApi.DataContext
             using var scope = _serviceProvider.CreateScope();
             ApplyContextMigration(scope);
             SeedRootUser(scope);
-            SeedTestData(scope);  // comment to skip seeding root test data
+            SeedTestData(scope); // comment to skip seeding root test data
             Initialised = true;
         }
 
         /// <summary>
-        /// Applies the context migration.
+        ///     Applies the context migration.
         /// </summary>
         /// <param name="scope">The scope.</param>
         private void ApplyContextMigration(IServiceScope scope)
@@ -77,7 +76,7 @@ namespace TopcoderNetApi.DataContext
         }
 
         /// <summary>
-        /// Seeds the users.
+        ///     Seeds the users.
         /// </summary>
         /// <param name="scope">The scope.</param>
         private void SeedRootUser(IServiceScope scope)
@@ -86,20 +85,20 @@ namespace TopcoderNetApi.DataContext
             var root = context.Users.FirstOrDefault(x => x.FullName == "root");
             if (root != null)
                 return;
-            root = new User() { FullName = "root", ImageUrl = "root" };
+            root = new User {FullName = "root", ImageUrl = "root"};
             context.Users.Add(root);
             context.SaveChanges();
         }
 
         /// <summary>
-        /// Seeds the test data.
+        ///     Seeds the test data.
         /// </summary>
         /// <param name="scope">The scope.</param>
         private void SeedTestData(IServiceScope scope)
         {
-            var rand = new Random((int)DateTime.Now.Ticks);
+            var rand = new Random((int) DateTime.Now.Ticks);
             var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
-            
+
             const string rootName = "root";
             var root = context.Users.FirstOrDefault(x => x.FullName == rootName);
 
@@ -107,7 +106,7 @@ namespace TopcoderNetApi.DataContext
             var course = context.Courses.FirstOrDefault(x => x.Name == rootCourse);
             if (course == null)
             {
-                course = new Course() { Name = rootCourse };
+                course = new Course {Name = rootCourse};
                 context.Courses.Add(course);
             }
 

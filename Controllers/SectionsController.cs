@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Sections;
 
@@ -15,19 +15,19 @@ namespace TopcoderNetApi.Controllers
     public class SectionsController : ControllerBase
     {
         /// <summary>
-        /// The service
+        ///     The service
         /// </summary>
         private readonly ISectionService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SectionsController"/> class.
+        ///     Initializes a new instance of the <see cref="SectionsController" /> class.
         /// </summary>
         /// <param name="service">The service.</param>
         public SectionsController(ISectionService service)
         {
             _service = service;
         }
-        
+
         // GET: api/<SectionsController>
         [HttpGet]
         public IEnumerable<Section> Get()
