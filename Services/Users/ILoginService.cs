@@ -13,5 +13,11 @@ namespace TopcoderNetApi.Services.Users
         /// <param name="user">The user.</param>
         /// <returns></returns>
         string GenerateJwt(User user);
+
+        /// <summary>
+        /// Gets the active user.
+        /// </summary>
+        /// <returns></returns>
+        User GetActiveUser();
     }
 }

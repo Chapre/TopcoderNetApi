@@ -51,86 +51,9 @@ namespace TopcoderNetApi.DataContext
                 return;
             using var scope = _serviceProvider.CreateScope();
             ApplyContextMigration(scope);
-            SeedUsers(scope);
-            SeedTestData(scope);
+            SeedRootUser(scope);
+            SeedTestData(scope);  // comment to skip seeding root test data
             Initialised = true;
-        }
-
-        private void SeedTestData(IServiceScope scope)
-        {
-            const string rootName = "root";
-            const string rootCourse = "root course";
-            const string rootSection = "root section";
-            const string rootLesson = "root lesson";
-
-            var rand = new Random((int) DateTime.Now.Ticks);
-            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
-            var root = context.Users.FirstOrDefault(x => x.FullName == rootName);
-            var course = context.Courses.FirstOrDefault(x => x.Name == rootCourse);
-            if (course == null)
-            {
-                course = new Course() {Name = rootCourse};
-                context.Courses.Add(course);
-            }
-
-            var section = context.Sections.FirstOrDefault(x => x.Name == rootSection);
-            if (section == null)
-            {
-                section = new Section
-                {
-                    Name = rootSection,
-                    Order = rand.Next(0, 100),
-                    Course = course
-                };
-                context.Sections.Add(section);
-            }
-
-            var lesson = context.Lessons.FirstOrDefault(x => x.Name == rootLesson);
-            if (lesson == null)
-            {
-                lesson = new Lesson
-                {
-                    Name = rootLesson,
-                    VideoUrl = new Guid().ToString(),
-                    Order = rand.Next(0, 100),
-                    Section = section
-                };
-
-                context.Lessons.Add(lesson);
-            }
-
-            var watchLog = context.WatchLogs.FirstOrDefault(x => x.User.Id == root.Id);
-            if (watchLog == null)
-            {
-                watchLog = new WatchLog
-                {
-                    Course = course,
-                    Lesson = lesson,
-                    User = root,
-                    PercentageWatched = rand.Next(0, 101)
-                };
-
-                context.WatchLogs.Add(watchLog);
-            }
-
-            if(!context.ChangeTracker.HasChanges())
-                return;
-            context.SaveChanges();
-        }
-
-        /// <summary>
-        /// Seeds the users.
-        /// </summary>
-        /// <param name="scope">The scope.</param>
-        private void SeedUsers(IServiceScope scope)
-        {
-            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
-            var root = context.Users.FirstOrDefault(x => x.FullName == "root");
-            if (root!=null)
-                return;
-            root = new User() {FullName = "root", ImageUrl = "root"};
-            context.Users.Add(root);
-            context.SaveChanges();
         }
 
         /// <summary>
@@ -151,8 +74,74 @@ namespace TopcoderNetApi.DataContext
                 _logger.LogInformation($"Migrating context failed!{Environment.NewLine}{ex?.Message}");
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Seeds the users.
+        /// </summary>
+        /// <param name="scope">The scope.</param>
+        private void SeedRootUser(IServiceScope scope)
+        {
+            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
+            var root = context.Users.FirstOrDefault(x => x.FullName == "root");
+            if (root != null)
+                return;
+            root = new User() { FullName = "root", ImageUrl = "root" };
+            context.Users.Add(root);
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Seeds the test data.
+        /// </summary>
+        /// <param name="scope">The scope.</param>
+        private void SeedTestData(IServiceScope scope)
+        {
+            var rand = new Random((int)DateTime.Now.Ticks);
+            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
             
-            
+            const string rootName = "root";
+            var root = context.Users.FirstOrDefault(x => x.FullName == rootName);
+
+            const string rootCourse = "root course";
+            var course = context.Courses.FirstOrDefault(x => x.Name == rootCourse);
+            if (course == null)
+            {
+                course = new Course() { Name = rootCourse };
+                context.Courses.Add(course);
+            }
+
+            const string rootSection = "root section";
+            var section = context.Sections.FirstOrDefault(x => x.Name == rootSection);
+            if (section == null)
+            {
+                section = new Section {Name = rootSection, Order = rand.Next(0, 100), Course = course};
+                context.Sections.Add(section);
+            }
+
+            const string rootLesson = "root lesson";
+            var lesson = context.Lessons.FirstOrDefault(x => x.Name == rootLesson);
+            if (lesson == null)
+            {
+                lesson = new Lesson
+                {
+                    Name = rootLesson, VideoUrl = new Guid().ToString(), Order = rand.Next(0, 100),
+                    Section = section
+                };
+                context.Lessons.Add(lesson);
+            }
+
+            var watchLog = context.WatchLogs.FirstOrDefault(x => x.User.Id == root.Id);
+            if (watchLog == null)
+            {
+                watchLog = new WatchLog
+                    {Course = course, Lesson = lesson, User = root, PercentageWatched = rand.Next(0, 101)};
+                context.WatchLogs.Add(watchLog);
+            }
+
+            if (!context.ChangeTracker.HasChanges())
+                return;
+            context.SaveChanges();
         }
     }
 }

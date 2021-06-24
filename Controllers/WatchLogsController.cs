@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using TopcoderNetApi.Model;
+using TopcoderNetApi.Services.Lessons;
+using TopcoderNetApi.Services.Users;
 using TopcoderNetApi.Services.WatchLogs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,12 +22,28 @@ namespace TopcoderNetApi.Controllers
         private readonly IWatchLogService _service;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WatchLogsController"/> class.
+        /// The lesson service
+        /// </summary>
+        private readonly ILessonService _lessonService;
+
+        private readonly ILoginService _loginService;
+
+        /// <summary>
+        /// The user service
+        /// </summary>
+        private readonly IUserService _userService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WatchLogsController" /> class.
         /// </summary>
         /// <param name="service">The service.</param>
-        public WatchLogsController(IWatchLogService service)
+        /// <param name="lessonService">The lesson service.</param>
+        /// <param name="loginService">The login service.</param>
+        public WatchLogsController(IWatchLogService service, ILessonService lessonService, ILoginService loginService)
         {
             _service = service;
+            _lessonService = lessonService;
+            _loginService = loginService;
         }
 
         // GET: api/<WatchLogsController>
@@ -58,8 +76,12 @@ namespace TopcoderNetApi.Controllers
         [HttpPost("{lessonId}/{pw?}")]
         public void Post(Guid lessonId, int pw)
         {
-            var currentUser = HttpContext.User;
-            _service.AddWatchLog(lessonId, pw);
+            var user = _loginService.GetActiveUser();
+            var lesson = _lessonService.GetLesson(lessonId);
+            if (lesson == null)
+                throw new Exception("The provided lesson does no exist");
+            _service.CreateRecord(user, lesson, pw);
+            _lessonService.Complete(lessonId);
         }
     }
 }

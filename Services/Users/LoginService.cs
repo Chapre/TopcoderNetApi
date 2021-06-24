@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
@@ -16,12 +19,41 @@ namespace TopcoderNetApi.Services.Users
         private readonly IConfiguration _config;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoginService"/> class.
+        /// The accessor
+        /// </summary>
+        private readonly IHttpContextAccessor _accessor;
+
+        /// <summary>
+        /// The context
+        /// </summary>
+        private readonly OnlineCourseDataContext _context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginService" /> class.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        public LoginService(IConfiguration config)
+        /// <param name="accessor">The accessor.</param>
+        /// <param name="context">The context.</param>
+        public LoginService(IConfiguration config, IHttpContextAccessor accessor, OnlineCourseDataContext context)
         {
             _config = config;
+            _accessor = accessor;
+            _context = context;
+        }
+
+        /// <summary>
+        /// Gets the active user.
+        /// </summary>
+        /// <returns></returns>
+        public User GetActiveUser()
+        {
+            if (_accessor?.HttpContext?.User?.Identity is ClaimsIdentity identity)
+            {
+                var name = identity.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+                return _context.Users.FirstOrDefault(x => x.FullName == name);
+            }
+
+            return null;
         }
 
         /// <summary>

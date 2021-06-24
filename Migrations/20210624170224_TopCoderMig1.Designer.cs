@@ -10,7 +10,7 @@ using TopcoderNetApi.DataContext;
 namespace TopcoderNetApi.Migrations
 {
     [DbContext(typeof(OnlineCourseDataContext))]
-    [Migration("20210624144053_TopCoderMig1")]
+    [Migration("20210624170224_TopCoderMig1")]
     partial class TopCoderMig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

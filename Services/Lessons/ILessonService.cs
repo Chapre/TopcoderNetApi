@@ -21,5 +21,11 @@ namespace TopcoderNetApi.Services.Lessons
         /// </summary>
         /// <returns></returns>
         IEnumerable<Lesson> GetLessons();
+
+        /// <summary>
+        /// Completes the specified lesson identifier.
+        /// </summary>
+        /// <param name="lessonId">The lesson identifier.</param>
+        void Complete(Guid lessonId);
     }
 }

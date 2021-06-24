@@ -45,5 +45,15 @@ namespace TopcoderNetApi.Services.Lessons
         {
             return _context.Lessons.ToList();
         }
+
+        /// <summary>
+        /// Completes the specified lesson identifier.
+        /// </summary>
+        /// <param name="lessonId">The lesson identifier.</param>
+        public void Complete(Guid lessonId)
+        {
+            var lesson = _context.Lessons.First(x => x.Id == lessonId);
+            lesson.IsCompleted = true;
+        }
     }
 }

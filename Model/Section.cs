@@ -38,7 +38,5 @@ namespace TopcoderNetApi.Model
         /// The course.
         /// </value>
         public Course Course { get; set; }
-
-
     }
 }

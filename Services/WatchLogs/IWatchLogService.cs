@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.WatchLogs
@@ -26,12 +23,13 @@ namespace TopcoderNetApi.Services.WatchLogs
         /// </summary>
         /// <param name="value">The value.</param>
         void AddWatchLog(WatchLog value);
-        
+
         /// <summary>
-        /// Adds the watch log.
+        /// Creates the record.
         /// </summary>
-        /// <param name="lessonId">The lesson identifier.</param>
+        /// <param name="user">The user.</param>
+        /// <param name="lesson">The lesson.</param>
         /// <param name="pw">The pw.</param>
-        void AddWatchLog(Guid lessonId, int pw);
+        void CreateRecord(User user, Lesson lesson, int pw);
     }
 }
