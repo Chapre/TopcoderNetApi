@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Model;
@@ -53,6 +54,25 @@ namespace TopcoderNetApi.Services.WatchLogs
                 Course = _context.Courses.First(x => x.Id == log.Course.Id),
                 Lesson = _context.Lessons.First(x => x.Id == log.Lesson.Id),
                 User = _context.Users.First(x => x.Id == log.User.Id)
+            };
+
+            _context.WatchLogs.Add(log);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adds the watch log.
+        /// </summary>
+        /// <param name="lessonId">The lesson identifier.</param>
+        /// <param name="pw">The pw.</param>
+        public void AddWatchLog(Guid lessonId, int pw)
+        {
+            var log = new WatchLog
+            {
+                PercentageWatched = pw,
+                Course = null,
+                Lesson = _context.Lessons.First(x => x.Id == lessonId),
+                User = null
             };
 
             _context.WatchLogs.Add(log);

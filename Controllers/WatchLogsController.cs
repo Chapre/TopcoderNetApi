@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.WatchLogs;
@@ -7,7 +8,7 @@ using TopcoderNetApi.Services.WatchLogs;
 
 namespace TopcoderNetApi.Controllers
 {
-    [Route("watchlog")]
+    [Route("watchLog")]
     [ApiController]
     public class WatchLogsController : ControllerBase
     {
@@ -45,6 +46,17 @@ namespace TopcoderNetApi.Controllers
         public void Post([FromBody] WatchLog value)
         {
             _service.AddWatchLog(value);
+        }
+
+        /// <summary>
+        /// Post2s the specified lesson identifier.
+        /// </summary>
+        /// <param name="lessonId">The lesson identifier.</param>
+        /// <param name="pw">The pw.</param>
+        [HttpPost("{lessonId}/{pw?}")]
+        public void Post(Guid lessonId, int pw)
+        {
+            _service.AddWatchLog(lessonId, pw);
         }
     }
 }

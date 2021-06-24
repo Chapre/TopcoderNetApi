@@ -26,5 +26,12 @@ namespace TopcoderNetApi.Services.WatchLogs
         /// </summary>
         /// <param name="value">The value.</param>
         void AddWatchLog(WatchLog value);
+        
+        /// <summary>
+        /// Adds the watch log.
+        /// </summary>
+        /// <param name="lessonId">The lesson identifier.</param>
+        /// <param name="pw">The pw.</param>
+        void AddWatchLog(Guid lessonId, int pw);
     }
 }
