@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using TopcoderNetApi.DataContext;
+using TopcoderNetApi.Services.Lesson;
 
 namespace TopcoderNetApi
 {
@@ -26,9 +28,10 @@ namespace TopcoderNetApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             ConfigureDatabaseContext(services);
             services.AddControllers();
+            services.AddSingleton<IContextService, ContextService>();
+            services.AddTransient<ILessonService, LessonService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });
@@ -51,7 +54,7 @@ namespace TopcoderNetApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IContextService onlineDb)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +63,7 @@ namespace TopcoderNetApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TopcoderNetApi v1"));
             }
 
+            onlineDb.Initialise();
             app.UseRouting();
 
             app.UseAuthorization();
