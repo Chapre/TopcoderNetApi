@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace TopcoderNetApi.Services.Lesson
+namespace TopcoderNetApi.Services.Lessons
 {
     class LessonService : ILessonService
     {

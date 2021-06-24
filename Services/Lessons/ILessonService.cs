@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TopcoderNetApi.Services.Lesson
+namespace TopcoderNetApi.Services.Lessons
 {
     public interface ILessonService
     {

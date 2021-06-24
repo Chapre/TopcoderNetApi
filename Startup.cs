@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TopcoderNetApi.DataContext;
-using TopcoderNetApi.Services.Lesson;
+using TopcoderNetApi.Services.Lessons;
 
 namespace TopcoderNetApi
 {

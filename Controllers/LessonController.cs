@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
-using TopcoderNetApi.Services.Lesson;
+using TopcoderNetApi.Services.Lessons;
 
 namespace TopcoderNetApi.Controllers
 {
