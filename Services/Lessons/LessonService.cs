@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TopcoderNetApi.DataContext;
+using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Lessons
 {
@@ -33,6 +35,15 @@ namespace TopcoderNetApi.Services.Lessons
             if (lesson == null)
                 throw new Exception("The provided lesson does not exist");
             return lesson;
+        }
+
+        /// <summary>
+        /// Gets the lessons.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Lesson> GetLessons()
+        {
+            return _context.Lessons.ToList();
         }
     }
 }

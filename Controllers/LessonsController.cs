@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TopcoderNetApi.Model;
@@ -31,6 +32,16 @@ namespace TopcoderNetApi.Controllers
         {
             Lesson lesson = _service.GetLesson(id);
             return lesson;
+        }
+
+        /// <summary>
+        /// Gets this instance.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<Lesson> Get()
+        {
+            return _service.GetLessons();
         }
     }
 }

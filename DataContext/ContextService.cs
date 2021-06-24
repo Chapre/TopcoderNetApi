@@ -58,13 +58,14 @@ namespace TopcoderNetApi.DataContext
 
         private void SeedTestData(IServiceScope scope)
         {
-            const string rootCourse = "course name";
-            const string rootSection = "section name";
-            const string rootLesson = "lesson name";
-            const string rootWatchLog = "watchlog name";
+            const string rootName = "root";
+            const string rootCourse = "root course";
+            const string rootSection = "root section";
+            const string rootLesson = "root lesson";
+
             var rand = new Random((int) DateTime.Now.Ticks);
             var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
-            var root = context.Users.FirstOrDefault(x => x.FullName == "root");
+            var root = context.Users.FirstOrDefault(x => x.FullName == rootName);
             var course = context.Courses.FirstOrDefault(x => x.Name == rootCourse);
             if (course == null)
             {
@@ -91,15 +92,30 @@ namespace TopcoderNetApi.DataContext
                 {
                     Name = rootLesson,
                     VideoUrl = new Guid().ToString(),
-                    Order = rand.Next(0,100),
+                    Order = rand.Next(0, 100),
                     Section = section
                 };
-                
+
                 context.Lessons.Add(lesson);
             }
 
+            var watchLog = context.WatchLogs.FirstOrDefault(x => x.User.Id == root.Id);
+            if (watchLog == null)
+            {
+                watchLog = new WatchLog
+                {
+                    Course = course,
+                    Lesson = lesson,
+                    User = root,
+                    PercentageWatched = rand.Next(0, 101)
+                };
 
+                context.WatchLogs.Add(watchLog);
+            }
 
+            if(!context.ChangeTracker.HasChanges())
+                return;
+            context.SaveChanges();
         }
 
         /// <summary>

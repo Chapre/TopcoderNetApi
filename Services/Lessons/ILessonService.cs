@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Lessons
@@ -14,5 +15,11 @@ namespace TopcoderNetApi.Services.Lessons
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         Lesson GetLesson(Guid id);
+
+        /// <summary>
+        /// Gets the lessons.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Lesson> GetLessons();
     }
 }
