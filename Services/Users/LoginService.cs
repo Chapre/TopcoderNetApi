@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
@@ -42,7 +41,7 @@ namespace TopcoderNetApi.Services.Users
             
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Issuer"],
-                claims,
+                null,
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
 

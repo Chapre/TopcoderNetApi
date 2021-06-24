@@ -52,7 +52,54 @@ namespace TopcoderNetApi.DataContext
             using var scope = _serviceProvider.CreateScope();
             ApplyContextMigration(scope);
             SeedUsers(scope);
+            SeedTestData(scope);
             Initialised = true;
+        }
+
+        private void SeedTestData(IServiceScope scope)
+        {
+            const string rootCourse = "course name";
+            const string rootSection = "section name";
+            const string rootLesson = "lesson name";
+            const string rootWatchLog = "watchlog name";
+            var rand = new Random((int) DateTime.Now.Ticks);
+            var context = scope.ServiceProvider.GetRequiredService<OnlineCourseDataContext>();
+            var root = context.Users.FirstOrDefault(x => x.FullName == "root");
+            var course = context.Courses.FirstOrDefault(x => x.Name == rootCourse);
+            if (course == null)
+            {
+                course = new Course() {Name = rootCourse};
+                context.Courses.Add(course);
+            }
+
+            var section = context.Sections.FirstOrDefault(x => x.Name == rootSection);
+            if (section == null)
+            {
+                section = new Section
+                {
+                    Name = rootSection,
+                    Order = rand.Next(0, 100),
+                    Course = course
+                };
+                context.Sections.Add(section);
+            }
+
+            var lesson = context.Lessons.FirstOrDefault(x => x.Name == rootLesson);
+            if (lesson == null)
+            {
+                lesson = new Lesson
+                {
+                    Name = rootLesson,
+                    VideoUrl = new Guid().ToString(),
+                    Order = rand.Next(0,100),
+                    Section = section
+                };
+                
+                context.Lessons.Add(lesson);
+            }
+
+
+
         }
 
         /// <summary>

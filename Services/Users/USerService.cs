@@ -5,7 +5,7 @@ using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Users
 {
-    class USerService : IUserService
+    class UserService : IUserService
     {
         /// <summary>
         /// The context
@@ -13,10 +13,10 @@ namespace TopcoderNetApi.Services.Users
         private readonly OnlineCourseDataContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="USerService"/> class.
+        /// Initializes a new instance of the <see cref="UserService"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public USerService(OnlineCourseDataContext context)
+        public UserService(OnlineCourseDataContext context)
         {
             _context = context;
         }
