@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TopcoderNetApi.Model;
 
-namespace TopcoderNetApi
+namespace TopcoderNetApi.DataContext
 {
     public class OnlineCourseDataContext: DbContext
     {

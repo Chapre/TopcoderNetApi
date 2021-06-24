@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Model;
 
 namespace TopcoderNetApi.Services.Courses

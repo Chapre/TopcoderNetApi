@@ -1,20 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Services.Courses;
 using TopcoderNetApi.Services.Lessons;
 using TopcoderNetApi.Services.Sections;
+using TopcoderNetApi.Services.Users;
+using TopcoderNetApi.Services.WatchLogs;
 
 namespace TopcoderNetApi
 {
@@ -36,6 +33,8 @@ namespace TopcoderNetApi
             services.AddTransient<ILessonService, LessonService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<ISectionService, SectionService>();
+            services.AddTransient<IWatchLogService, WatchLogService>();
+            services.AddTransient<IUSerService, USerService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });

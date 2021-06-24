@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using TopcoderNetApi.DataContext;
 using TopcoderNetApi.Model;
 using TopcoderNetApi.Services.Lessons;
 

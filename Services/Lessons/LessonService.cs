@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using TopcoderNetApi.DataContext;
 
 namespace TopcoderNetApi.Services.Lessons
 {

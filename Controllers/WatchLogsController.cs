@@ -7,7 +7,7 @@ using TopcoderNetApi.Services.WatchLogs;
 
 namespace TopcoderNetApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("watchlog")]
     [ApiController]
     public class WatchLogsController : ControllerBase
     {

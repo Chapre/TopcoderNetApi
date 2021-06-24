@@ -10,7 +10,7 @@ using TopcoderNetApi.Services.Users;
 
 namespace TopcoderNetApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("user")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -27,14 +27,22 @@ namespace TopcoderNetApi.Controllers
         {
             _service = service;
         }
-        // GET: api/<UsersController>
+
+        /// <summary>
+        /// Gets this instance.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<User> Get()
         {
             return _service.GetUsers();
         }
 
-        // GET api/<UsersController>/5
+        /// <summary>
+        /// Gets the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public User Get(string id)
         {
@@ -42,23 +50,14 @@ namespace TopcoderNetApi.Controllers
             return user;
         }
 
-        // POST api/<UsersController>
+        /// <summary>
+        /// Posts the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
         [HttpPost]
         public void Post([FromBody] User value)
         {
             _service.AddUser(value);
-        }
-
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
