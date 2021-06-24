@@ -40,7 +40,7 @@ namespace TopcoderNetApi.Controllers
         public IActionResult Login([FromBody] LoginModel login)
         {
             IActionResult response = Unauthorized();
-            var user = _userService.GetUserByName(login.Username);
+            var user = _userService.GetUserByName(login.FullName);
             if (user != null)
             {
                 var tokenString = _loginService.GenerateJwt(user);

@@ -8,7 +8,7 @@
         /// <value>
         ///     The username.
         /// </value>
-        public string Username { get; set; }
+        public string FullName { get; set; }
 
         /// <summary>
         ///     Gets or sets the password.
