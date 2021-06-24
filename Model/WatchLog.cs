@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace TopcoderNetApi.Model
         /// The identifier.
         /// </value>
         public string Id { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the course.
         /// </summary>
@@ -45,6 +46,7 @@ namespace TopcoderNetApi.Model
         /// <value>
         /// The percentage watched.
         /// </value>
+        [Range(0, 100)]
         public int PercentageWatched { get; set; }
     }
 }

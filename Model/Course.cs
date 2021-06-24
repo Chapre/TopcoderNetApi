@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace TopcoderNetApi.Model
         /// <value>
         /// The name.
         /// </value>
+        [MaxLength(250)]
         public string Name { get; set; }
     }
 }
