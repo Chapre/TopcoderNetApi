@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TopcoderNetApi;
 using TopcoderNetApi.DataContext;
 
 namespace TopcoderNetApi.Migrations
 {
     [DbContext(typeof(OnlineCourseDataContext))]
-    [Migration("20210624103330_TopCoderMig1")]
+    [Migration("20210624130841_TopCoderMig1")]
     partial class TopCoderMig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +18,7 @@ namespace TopcoderNetApi.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TopcoderNetApi.Model.Course", b =>
@@ -29,7 +28,8 @@ namespace TopcoderNetApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 
@@ -43,7 +43,8 @@ namespace TopcoderNetApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
@@ -52,7 +53,8 @@ namespace TopcoderNetApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("VideoUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(355)
+                        .HasColumnType("nvarchar(355)");
 
                     b.HasKey("Id");
 
@@ -71,7 +73,8 @@ namespace TopcoderNetApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
@@ -109,6 +112,9 @@ namespace TopcoderNetApi.Migrations
 
                     b.Property<Guid?>("LessonId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PercentageWatched")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");

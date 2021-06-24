@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +33,8 @@ namespace TopcoderNetApi
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureDatabaseContext(services);
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddSingleton<IContextService, ContextService>();
             services.AddTransient<ILessonService, LessonService>();
             services.AddTransient<ICourseService, CourseService>();
@@ -40,11 +43,17 @@ namespace TopcoderNetApi
             services.AddTransient<IUSerService, USerService>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TopcoderNetApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "TopcoderNetApi", Version = "v1"});
             });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+                    var claims = new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Sub, "userInfo.Username"),
+                        new Claim(JwtRegisteredClaimNames.Email, "userInfo.EmailAddress"),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    };
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,

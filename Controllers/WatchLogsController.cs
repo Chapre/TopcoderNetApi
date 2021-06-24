@@ -56,6 +56,7 @@ namespace TopcoderNetApi.Controllers
         [HttpPost("{lessonId}/{pw?}")]
         public void Post(Guid lessonId, int pw)
         {
+            var currentUser = HttpContext.User;
             _service.AddWatchLog(lessonId, pw);
         }
     }

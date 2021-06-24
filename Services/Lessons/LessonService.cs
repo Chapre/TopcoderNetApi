@@ -28,7 +28,8 @@ namespace TopcoderNetApi.Services.Lessons
         /// <returns></returns>
         public Model.Lesson GetLesson(Guid id)
         {
-            var lesson = _context.Lessons.Include(x => x.Section).FirstOrDefault(x => x.Id == id);
+            var lesson = _context.Lessons.Include(x => x.Section).ThenInclude(x => x.Course)
+                .FirstOrDefault(x => x.Id == id);
             if (lesson == null)
                 throw new Exception("The provided lesson does not exist");
             return lesson;
