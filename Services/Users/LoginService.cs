@@ -47,10 +47,10 @@ namespace TopcoderNetApi.Services.Users
         /// <returns></returns>
         public User GetActiveUser()
         {
-            if (_accessor?.HttpContext?.User?.Identity is ClaimsIdentity identity)
+            if (_accessor?.HttpContext?.User.Identity is ClaimsIdentity identity)
             {
-                var name = identity.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-                return _context.Users.FirstOrDefault(x => x.FullName == name);
+                var id = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                return _context.Users.FirstOrDefault(x => x.Id == id);
             }
 
             return null;
@@ -67,13 +67,13 @@ namespace TopcoderNetApi.Services.Users
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.FullName),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-            
+
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Issuer"],
-                null,
+                claims,
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
 
