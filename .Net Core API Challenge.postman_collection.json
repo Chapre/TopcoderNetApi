@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "9f2c3d30-d70e-4df8-9086-e37644dd430e",
+		"name": ".Net Core API Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autheticate&TokenRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"FullName\": \"root\",\r\n  \"Password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLessons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzllYzViMC1hMmQzLTQ0ZjItOTAzNi0xMWNiNWM4MjE0ZmQiLCJqdGkiOiIxNjA5MTVjMS00OGExLTQ4ZTktYTJjMS0yNjUyMDBiYmJkYWYiLCJleHAiOjE2MjQ1ODU4ODMsImlzcyI6ImNoYXByZXNvZnQuY29tIiwiYXVkIjoiY2hhcHJlc29mdC5jb20ifQ.aH_jfG9MposQ34xh0TtHTJHGzzCrZyCKOkQcHUSh2FE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLesson",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzllYzViMC1hMmQzLTQ0ZjItOTAzNi0xMWNiNWM4MjE0ZmQiLCJqdGkiOiI3NWY5YzVkNi1jNWM0LTQxZWQtYmM3Zi1iNzllYjkxMDdkZWQiLCJleHAiOjE2MjQ1ODk2NjcsImlzcyI6ImNoYXByZXNvZnQuY29tIiwiYXVkIjoiY2hhcHJlc29mdC5jb20ifQ.qq9YqkmluvtkWCtDGCwJlecNdC5EjP4DjxgOtR0neo4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson/:id?pw=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson",
+						":id"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": "0"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RecordWatchLog",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzllYzViMC1hMmQzLTQ0ZjItOTAzNi0xMWNiNWM4MjE0ZmQiLCJqdGkiOiIwYmYzMDVkZi01MTNjLTQzMjctODg0Mi03MzdkYTFjMDJmNzQiLCJleHAiOjE2MjQ1ODc0OTUsImlzcyI6ImNoYXByZXNvZnQuY29tIiwiYXVkIjoiY2hhcHJlc29mdC5jb20ifQ.lNuyKPjcdLUXr_M8W0uTuplzL6W6h95N24GMFJ5Lpew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/watchLog/:lessonId?pw=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"watchLog",
+						":lessonId"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": "12"
+						}
+					],
+					"variable": [
+						{
+							"key": "lessonId",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLesson Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzllYzViMC1hMmQzLTQ0ZjItOTAzNi0xMWNiNWM4MjE0ZmQiLCJqdGkiOiIwYmYzMDVkZi01MTNjLTQzMjctODg0Mi03MzdkYTFjMDJmNzQiLCJleHAiOjE2MjQ1ODc0OTUsImlzcyI6ImNoYXByZXNvZnQuY29tIiwiYXVkIjoiY2hhcHJlc29mdC5jb20ifQ.lNuyKPjcdLUXr_M8W0uTuplzL6W6h95N24GMFJ5Lpew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson/:id?pw&=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson",
+						":id"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": null
+						},
+						{
+							"key": null,
+							"value": "0"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

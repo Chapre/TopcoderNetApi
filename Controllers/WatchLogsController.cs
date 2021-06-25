@@ -72,7 +72,7 @@ namespace TopcoderNetApi.Controllers
         /// </summary>
         /// <param name="lessonId">The lesson identifier.</param>
         /// <param name="pw">The pw.</param>
-        [HttpPost("{lessonId}/{pw?}")]
+        [HttpPost("{lessonId}")]
         public void Post(Guid lessonId, int pw)
         {
             var user = _loginService.GetActiveUser();

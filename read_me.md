@@ -6,6 +6,10 @@ We made use of .Net 5 with the following packages:
  - Microsoft.EntityFrameworkCore.Tools: Version="5.0.7"
  - Swashbuckle.AspNetCore:  Version="6.1.4"
 
+ Note that we are developping on Microsoft Visual Studio Community 2019 (Version 16.9.2)
+ This document read_me is based on the onboad swagger. note that postman collection are also available at the bottom.
+ The default port is: **3000**; use **hosting.jsn** to set desired port
+
 ## SQL  Server connection
 Note that the Sql connection string is required in order to make the whole Api project to work.
 Whether the app usersecrets config or appsettings are used, the connection string has to figure somewhere in the format below: 
@@ -22,10 +26,12 @@ Note than for testing, purpose, once the migration is complete; the  application
 
 ## Swagger
 Once project has run and has ensured proper initialization of the database, a swagger page will be opened.
-Note that all test were done through swagger. On swagger page all method need to authenticate, request token, add user, course, sector or lesson.
+Note that all test were done through swagger. 
+On swagger page all necessary controllers/methods needed to authenticate, request token, request detailed lesson or create a watchLog are listed. To activate a method on a given controllers ensure that **Try it out** is pressed first.
 
 ## Login 
-To performance the login test which is authenticating the user to the database and then returning the token that will allow access to the rest of the api.
+[http://localhost:3000/login](http://localhost:3000/login) (post)
+To perform the login test which is authenticating the user to the database and then returning the token that will allow access to the rest of the api.
 Navigate to swagger, on the locate the login controller, then do a login post. the LoginModel require a full-name and a password, but in this scope only the full-name is required.
 A default user full-name is already given which is **root**
 Fill in the root for FullName than press execute.
@@ -87,7 +93,7 @@ Once this request is performed, we can expect 5 processes happen:
  4. A **WatchLog** entry is then created with all field above populated then inserted into the database
  5. **IsCompleted** field of the lesson given by the **lessonId** is set to true then updated on the database
  6. 
-## Conclusion
+## Final Result
 Final output sample with **IsCompleted** switched to tru
 ```json
 [
@@ -108,4 +114,229 @@ Final output sample with **IsCompleted** switched to tru
     "IsCompleted": true
   }
 ]
+```
+
+## Postman Collection
+Below is the Postman collection; replace ids or token where necessary
+```json
+{
+{
+	"info": {
+		"_postman_id": "9f2c3d30-d70e-4df8-9086-e37644dd430e",
+		"name": ".Net Core API Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autheticate&TokenRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"FullName\": \"root\",\r\n  \"Password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLessons",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "put token here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLesson",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "put token here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson/:id?pw=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson",
+						":id"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": "0"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RecordWatchLog",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "put token here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/watchLog/:lessonId?pw=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"watchLog",
+						":lessonId"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": "12"
+						}
+					],
+					"variable": [
+						{
+							"key": "lessonId",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLesson Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "put token here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lesson/:id?pw&=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lesson",
+						":id"
+					],
+					"query": [
+						{
+							"key": "pw",
+							"value": null
+						},
+						{
+							"key": null,
+							"value": "0"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0f3099a0-386e-4837-bab1-08d9373d71a2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
 ```
